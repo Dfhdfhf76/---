@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бесплатный тренажёр по веб-разработке</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .task {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .editor {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .success {
+            color: #27ae60;
+        }
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Тренажёр по веб-разработке</h1>
+    <p>Практикуй HTML, CSS и JavaScript в интерактивных заданиях!</p>
+
+    <!-- Задание 1: HTML -->
+    <div class="task">
+        <h3>Задание 1: Создай заголовок</h3>
+        <p>Напиши HTML-код, который выведет: <code>&lt;h1&gt;Привет, мир!&lt;/h1&gt;</code></p>
+        <textarea class="editor" id="html-code">&lt;h1&gt;Вставь код здесь&lt;/h1&gt;</textarea>
+        <button onclick="checkHtmlTask()">Проверить</button>
+        <p id="html-result"></p>
+    </div>
+
+    <!-- Задание 2: CSS -->
+    <div class="task">
+        <h3>Задание 2: Измени цвет текста</h3>
+        <p>Добавь CSS, чтобы текст стал красным: <code>color: red;</code></p>
+        <textarea class="editor" id="css-code">p { color: black; }</textarea>
+        <button onclick="checkCssTask()">Проверить</button>
+        <p id="css-demo">Этот текст должен стать красным.</p>
+        <p id="css-result"></p>
+    </div>
+
+    <!-- Задание 3: JS -->
+    <div class="task">
+        <h3>Задание 3: Напиши функцию</h3>
+        <p>Допиши код, чтобы кнопка выводила "Успех!" в консоль.</p>
+        <textarea class="editor" id="js-code">document.getElementById("test-btn").onclick = function() {
+    // Твой код здесь
+};</textarea>
+        <button id="test-btn">Тестовая кнопка</button>
+        <p id="js-result"></p>
+    </div>
+
+    <script>
+        // Проверка HTML
+        function checkHtmlTask() {
+            const code = document.getElementById("html-code").value;
+            const result = document.getElementById("html-result");
+            if (code.includes("<h1>Привет, мир!</h1>")) {
+                result.innerHTML = "<span class='success'>✅ Верно! Отличная работа.</span>";
+            } else {
+                result.innerHTML = "<span class='error'>❌ Попробуй ещё раз. Нужно: &lt;h1&gt;Привет, мир!&lt;/h1&gt;</span>";
+            }
+        }
+
+        // Проверка CSS
+        function checkCssTask() {
+            const code = document.getElementById("css-code").value;
+            const result = document.getElementById("css-result");
+            if (code.includes("color: red;") || code.includes("color:red;")) {
+                result.innerHTML = "<span class='success'>✅ Отлично! Текст теперь красный.</span>";
+            } else {
+                result.innerHTML = "<span class='error'>❌ Не получилось. Используй: color: red;</span>";
+            }
+        }
+
+        // Проверка JavaScript
+        document.getElementById("js-code").addEventListener("input", function() {
+            try {
+                eval(this.value);
+            } catch (e) {}
+        });
+
+        document.getElementById("test-btn").addEventListener("click", function() {
+            const result = document.getElementById("js-result");
+            try {
+                const code = document.getElementById("js-code").value;
+                if (code.includes('console.log("Успех!")')) {
+                    result.innerHTML = "<span class='success'>✅ Всё работает! Проверь консоль (F12).</span>";
+                } else {
+                    result.innerHTML = "<span class='error'>❌ Код не выводит 'Успех!' в консоль.</span>";
+                }
+            } catch (e) {
+                result.innerHTML = "<span class='error'>❌ Ошибка: " + e.message + "</span>";
+            }
+        });
+    </script>
+</body>
+</html>
